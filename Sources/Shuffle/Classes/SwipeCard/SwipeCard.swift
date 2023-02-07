@@ -119,7 +119,7 @@ open class SwipeCard: SwipeView {
   func swipeTransform() -> CGAffineTransform {
     let dragTranslation = panGestureRecognizer.translation(in: self)
     let translation = CGAffineTransform(translationX: dragTranslation.x,
-                                        y: dragTranslation.y)
+                                        y: 0)
     let rotation = CGAffineTransform(rotationAngle: swipeRotationAngle())
     return translation.concatenating(rotation)
   }
