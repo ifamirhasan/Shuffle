@@ -36,6 +36,7 @@ class TapGestureRecognizer: UITapGestureRecognizer {
     testTarget = target as AnyObject
     testAction = action
     super.init(target: target, action: action)
+    cancelsTouchesInView = false
   }
 
   override func location(in view: UIView?) -> CGPoint {
