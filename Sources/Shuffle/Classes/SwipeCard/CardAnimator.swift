@@ -124,7 +124,8 @@ class CardAnimator: CardAnimatable {
 
   func addReverseSwipeAnimationKeyFrames(_ card: SwipeCard, direction: SwipeDirection) {
     let overlay = card.overlay(forDirection: direction)
-    let relativeOverlayDuration = overlay != nil ? card.animationOptions.relativeReverseSwipeOverlayFadeDuration : 0.0
+//    let relativeOverlayDuration = overlay != nil ? card.animationOptions.relativeReverseSwipeOverlayFadeDuration : 0.0
+      let relativeOverlayDuration: Double = 0
 
     // Transform
     Animator.addTransformKeyFrame(to: card,
@@ -150,12 +151,13 @@ class CardAnimator: CardAnimatable {
       card.overlay(forDirection: swipeDirection)?.alpha = 0.0
     }
 
-    let relativeOverlayDuration = (forced && overlay != nil)
-      ? card.animationOptions.relativeSwipeOverlayFadeDuration
-      : 0.0
-    Animator.addFadeKeyFrame(to: overlay,
-                             relativeDuration: relativeOverlayDuration,
-                             alpha: 1.0)
+      let relativeOverlayDuration: Double = 0
+//    let relativeOverlayDuration = (forced && overlay != nil)
+//      ? card.animationOptions.relativeSwipeOverlayFadeDuration
+//      : 0.0
+//    Animator.addFadeKeyFrame(to: overlay,
+//                             relativeDuration: relativeOverlayDuration,
+//                             alpha: 1.0)
 
     // Transform
     let transform = swipeTransform(card, direction: direction, forced: forced)
