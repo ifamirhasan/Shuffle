@@ -469,4 +469,8 @@ open class SwipeCardStack: UIView, SwipeCardDelegate, UIGestureRecognizerDelegat
   func cardDidSwipe(_ card: SwipeCard, withDirection direction: SwipeDirection) {
     swipeAction(topCard: card, direction: direction, forced: false, animated: true)
   }
+    
+    func overlayPercentageDidUpdate(_ card: SwipeCard, withDirection direction: SwipeDirection, percent: CGFloat) {
+        delegate?.overlayPercentageDidUpdate?(self, direction: direction, percent: percent)
+    }
 }

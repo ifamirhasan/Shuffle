@@ -181,4 +181,8 @@ extension TinderViewController: ButtonStackViewDelegate, SwipeCardStackDataSourc
       break
     }
   }
+    
+    func overlayPercentageDidUpdate(_ cardStack: SwipeCardStack, direction: SwipeDirection, percent: CGFloat) {
+        print("overlay direction: \(direction) and percent: \(percent)")
+    }
 }

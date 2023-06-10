@@ -170,7 +170,9 @@ open class SwipeCard: SwipeView {
     transform = swipeTransform()
 
     for (direction, overlay) in overlays {
-      overlay.alpha = swipeOverlayPercentage(forDirection: direction)
+      let percent = swipeOverlayPercentage(forDirection: direction)
+      overlay.alpha = percent
+      delegate?.overlayPercentageDidUpdate(self, withDirection: direction, percent: percent)
     }
   }
 

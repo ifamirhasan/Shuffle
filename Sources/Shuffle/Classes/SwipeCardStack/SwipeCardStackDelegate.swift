@@ -37,4 +37,7 @@ import UIKit
 
   @objc
   optional func didSwipeAllCards(_ cardStack: SwipeCardStack)
+    
+  @objc
+  optional func overlayPercentageDidUpdate(_ cardStack: SwipeCardStack, direction: SwipeDirection, percent: CGFloat)
 }
