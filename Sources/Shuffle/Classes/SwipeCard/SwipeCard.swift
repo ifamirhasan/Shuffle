@@ -187,6 +187,9 @@ open class SwipeCard: SwipeView {
     super.didCancelSwipe(recognizer)
     delegate?.cardDidCancelSwipe(self)
     animator.animateReset(on: self)
+      for (direction, _) in overlays {
+          delegate?.overlayPercentageDidUpdate(self, withDirection: direction, percent: 0)
+      }
   }
 
   // MARK: - Main Methods
@@ -243,5 +246,8 @@ open class SwipeCard: SwipeView {
   public func removeAllAnimations() {
     layer.removeAllAnimations()
     animator.removeAllAnimations(on: self)
+      for (direction, _) in overlays {
+          delegate?.overlayPercentageDidUpdate(self, withDirection: direction, percent: 0)
+      }
   }
 }
