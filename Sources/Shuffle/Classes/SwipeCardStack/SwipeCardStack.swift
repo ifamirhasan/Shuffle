@@ -311,6 +311,8 @@ open class SwipeCardStack: UIView, SwipeCardDelegate, UIGestureRecognizerDelegat
         insertCard(Card(index: index, card: card), at: position)
       }
     }
+      
+      isAnimating = false
   }
 
   func insertCard(_ value: Card, at position: Int) {
