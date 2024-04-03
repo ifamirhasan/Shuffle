@@ -406,7 +406,9 @@ open class SwipeCardStack: UIView, SwipeCardDelegate, UIGestureRecognizerDelegat
       fatalError(errorString)
     }
 
-    reloadVisibleCards()
+      if visibleCards.count < numberOfVisibleCards {
+          reloadVisibleCards()
+      }
   }
 
   /// Deletes the cards at the specified indices. If an index corresponds to a card that has been swiped,
