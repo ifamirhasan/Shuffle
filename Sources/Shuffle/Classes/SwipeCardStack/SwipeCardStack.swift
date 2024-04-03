@@ -305,16 +305,21 @@ open class SwipeCardStack: UIView, SwipeCardDelegate, UIGestureRecognizerDelegat
   }
 
   func reloadVisibleCards() {
-    visibleCards.forEach { $0.card.removeFromSuperview() }
-    visibleCards.removeAll()
-
-    let numberOfCards = min(stateManager.remainingIndices.count, numberOfVisibleCards)
-    for position in 0..<numberOfCards {
-      let index = stateManager.remainingIndices[position]
-      if let card = loadCard(at: index) {
-        insertCard(Card(index: index, card: card), at: position)
+      visibleCards.forEach {
+          $0.card.swipeDirections = []
+          $0.card.removeFromSuperview()
       }
-    }
+      visibleCards.removeAll()
+      
+      cardContainer.subviews.forEach { $0.removeFromSuperview() }
+      
+      let numberOfCards = min(stateManager.remainingIndices.count, numberOfVisibleCards)
+      for position in 0..<numberOfCards {
+          let index = stateManager.remainingIndices[position]
+          if let card = loadCard(at: index) {
+              self.insertCard(Card(index: index, card: card), at: position)
+        }
+      }
       
       isAnimating = false
   }
@@ -466,6 +471,8 @@ open class SwipeCardStack: UIView, SwipeCardDelegate, UIGestureRecognizerDelegat
 
   func cardDidCancelSwipe(_ card: SwipeCard) {
     animator.animateReset(self, topCard: card)
+      guard let topCardIndex else { return }
+      delegate?.cardStack?(self, didCancelSwipeAt: topCardIndex)
   }
 
   func cardDidFinishSwipeAnimation(_ card: SwipeCard) {

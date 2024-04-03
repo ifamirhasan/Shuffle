@@ -31,7 +31,7 @@ class TinderViewController: UIViewController {
 
   private let buttonStackView = ButtonStackView()
 
-  private let cardModels = [
+  private var cardModels = [
     TinderCardModel(name: "Michelle",
                     age: 26,
                     occupation: "Graphic Designer",
@@ -72,6 +72,19 @@ class TinderViewController: UIViewController {
     layoutButtonStackView()
     layoutCardStackView()
     configureBackgroundGradient()
+      
+      Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+          print("WILL LOADMORE")
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+              print("DID LOADMORE")
+              var indices = [Int]()
+              for x in 0...4 {
+                  self.cardModels.append(self.cardModels[0])
+                  indices.append(self.cardModels.count - 1)
+              }
+              self.cardStack.appendCards(atIndices: indices)
+          }
+      }
   }
 
   private func configureNavigationBar() {
@@ -133,7 +146,7 @@ extension TinderViewController: ButtonStackViewDelegate, SwipeCardStackDataSourc
   func cardStack(_ cardStack: SwipeCardStack, cardForIndexAt index: Int) -> SwipeCard {
     let card = SwipeCard()
     card.footerHeight = 80
-    card.swipeDirections = [.left, .up, .right]
+    card.swipeDirections = [.left]
     for direction in card.swipeDirections {
       card.setOverlay(TinderCardOverlay(direction: direction), forDirection: direction)
     }
@@ -183,6 +196,10 @@ extension TinderViewController: ButtonStackViewDelegate, SwipeCardStackDataSourc
   }
     
     func overlayPercentageDidUpdate(_ cardStack: SwipeCardStack, direction: SwipeDirection, percent: CGFloat) {
-        print("overlay direction: \(direction) and percent: \(percent)")
+//        print("overlay direction: \(direction) and percent: \(percent)")
+    }
+    
+    func cardStack(_ cardStack: SwipeCardStack, didCancelSwipeAt index: Int) {
+        print("Did cancel swipe at: \(index)")
     }
 }
